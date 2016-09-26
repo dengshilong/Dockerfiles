@@ -1,0 +1,4 @@
+*.swp
+*.pyc
+data/mysql
+data/webroot/blog
