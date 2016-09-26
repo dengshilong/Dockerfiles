@@ -11,6 +11,8 @@ nginx:
         - ./data/nginx/conf.d/:/etc/nginx/conf.d/
     volumes_from:
         - php
+    restart: always
+
 php:
     build: ./php
     container_name: php
@@ -20,6 +22,7 @@ php:
         - mysql
     volumes:
         - ./data/webroot:/var/www/html
+    restart: always
 
 mysql:
     build: ./mysql
@@ -31,9 +34,11 @@ mysql:
         - ./mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
     environment:
       MYSQL_ROOT_PASSWORD: mysql123
+    restart: always
 
 redis:
     build: ./redis
     container_name: redis
     ports:
       - 6379:6379
+    restart: always
