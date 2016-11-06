@@ -1,0 +1,10 @@
+FROM python:3.5.2
+
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY src/lovehate /usr/src/app
+RUN mkdir /root/.pip
+COPY configs/pip/pip.conf /root/.pip/
+RUN pip install --no-cache-dir -r requirement.txt
