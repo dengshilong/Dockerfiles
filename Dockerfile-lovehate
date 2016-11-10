@@ -5,12 +5,13 @@ WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y \
     vim
 COPY src/lovehate /usr/src/app
-RUN mkdir /usr/src/app/server/logs
-RUN touch /usr/src/app/server/logs/debug.log
+#RUN  mkdir /usr/src/app/logs
+RUN  touch /usr/src/app/logs/debug.log
 RUN mkdir /root/.pip
 COPY configs/pip/pip.conf /root/.pip/
 RUN pip install --no-cache-dir -r requirement.txt
-WORKDIR /usr/src/app/server
-RUN gunicorn server.wsgi:application -k gevent -b 127.0.0.1:8000 -w 3 -t 600 --max-requests=500  --worker-connections=1000 --log-level=debug
+WORKDIR /usr/src/app/
+#RUN gunicorn server.wsgi:application -k gevent -b 127.0.0.1:8000 -w 3 -t 600 --max-requests=500  --worker-connections=1000 --log-level=debug
 EXPOSE 8000
 #CMD ["/usr/bin/python"]
+CMD ["/usr/src/app/gunicorn_start"]
